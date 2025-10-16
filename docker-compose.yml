@@ -1,0 +1,35 @@
+version: "3.8"
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: accomation_mysql
+    restart: always
+    env_file:
+      - ./backend/.env
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - invoice-network
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    restart: always
+    env_file:
+      - ./backend/.env
+    ports:
+      - "8080:80"
+    depends_on:
+      - mysql
+    networks:
+      - invoice-network
+
+volumes:
+  mysql_data:
+
+networks:
+  invoice-network:
+    driver: bridge

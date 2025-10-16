@@ -1,0 +1,168 @@
+:host {
+  display: block;
+}
+
+mat-toolbar {
+  span {
+    font-weight: 500;
+  }
+
+  button[mat-icon-button] {
+    margin-right: 8px;
+  }
+}
+
+.container {
+  max-width: 1000px;
+  margin: 16px auto;
+  padding: 0 16px;
+}
+
+mat-card {
+  padding: 16px;
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 6px 0 12px;
+}
+
+.meta .date {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.meta .amount {
+  font-weight: 600;
+}
+
+.head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+
+.head h2 {
+  margin: 0 0 4px;
+}
+
+
+.head .amount {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.details {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin: 12px 0;
+  margin-bottom: 24px;
+}
+
+@media (max-width: 600px) {
+  .details {
+    grid-template-columns: 1fr;
+    gap: 0;
+    margin-bottom: 12px;
+  }
+}
+
+.detail {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.detail > * {
+  flex: 1; /* Makes all children take equal available width */
+}
+
+.detail > :first-child {
+  font-weight: 600;
+  color: #333;
+}
+
+.addr {
+  padding: 12px;
+}
+
+h3 {
+  margin: 12px 0 8px;
+  font-weight: 600;
+}
+
+.items-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table-wrap {
+  width: 100%;
+  overflow-x: auto;
+}
+
+.items-table thead th {
+  text-align: left;
+  font-weight: 600;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  padding: 8px;
+}
+
+.items-table tbody td {
+  padding: 10px 8px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.footer {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 8px;
+  font-size: 15px;
+}
+
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+}
+
+@media (max-width: 720px) {
+  .head {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .addresses {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .head .small {
+    color: rgba(255, 255, 255, 0.7);
+  }
+  .items-table thead th {
+    border-bottom-color: rgba(255, 255, 255, 0.12);
+  }
+  .items-table tbody td {
+    border-bottom-color: rgba(255, 255, 255, 0.06);
+  }
+}
+
+

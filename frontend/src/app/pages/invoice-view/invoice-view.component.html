@@ -1,0 +1,72 @@
+<mat-toolbar color="primary">
+  <button mat-icon-button routerLink="/invoices"><mat-icon>arrow_back</mat-icon></button>
+  <span>Invoice Details</span>
+</mat-toolbar>
+
+<div class="container" *ngIf="invoice; else loader">
+  <mat-card>
+    <strong>Invoice #{{ invoice.invoiceNumber ?? invoice.id }}</strong>
+    <div class="meta">
+      <div class="date"><mat-icon>event</mat-icon> {{ invoice.createdAt | date:'mediumDate' }}</div>
+      <div class="amount">₹ {{ invoice.totalAmount | number:'1.2-2' }}</div>
+    </div>
+    
+    <h5>Invoice Details</h5>
+    <div class="details">
+      <div>
+        <div class="detail">
+          <span>Sender Name:</span> 
+          <span>{{ invoice.fromName }}</span>
+        </div>
+        <div class="detail">
+          <span>Sender Address:</span> 
+          <span>{{ invoice.fromAddress }}</span>
+        </div>
+        <div class="detail">
+          <span>Receiver Name:</span> 
+          <span>{{ invoice.toName }}</span>
+        </div>
+        <div class="detail">
+          <span>Receiver Address:</span> 
+          <span>{{ invoice.toAddress }}</span>
+        </div>
+      </div>
+      <div>
+        <div class="detail">
+          <span>Invoice Date:</span> 
+          <span>{{ invoice.createdAt | date:'medium' }}</span>
+        </div>
+        <div class="detail">
+          <span>Receiver Amount:</span> 
+          <span>₹{{ invoice.totalAmount | number:'1.2-2' }}</span>
+        </div>
+      </div>
+    </div>
+
+    <h5>Invoice Items</h5>
+    <div class="table-wrap">
+    <table class="items-table">
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Qty</th>
+          <th>Rate</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let d of invoice.invoiceDetails">
+          <td>{{ d.itemName }}</td>
+          <td>{{ d.itemQuantity }}</td>
+          <td>₹{{ d.itemRate | number:'1.2-2' }}</td>
+          <td>₹{{ (d.itemQuantity * d.itemRate) | number:'1.2-2' }}</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+  </mat-card>
+</div>
+
+<ng-template #loader>
+  <div class="center"><mat-spinner></mat-spinner></div>
+</ng-template>

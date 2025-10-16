@@ -1,0 +1,107 @@
+:host {
+  display: block;
+}
+
+mat-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  h1 {
+    font-weight: 500;
+  }
+}
+
+.container {
+  max-width: 1200px;
+  margin: 16px auto;
+  padding: 0 16px;
+}
+
+mat-card {
+  padding: 16px;
+}
+
+.toolbar-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.search {
+  width: 100%;
+}
+
+@media (max-width: 600px) {
+  .search {
+    width: 100%;
+  }
+}
+
+.table-wrap {
+  width: 100%;
+  overflow: auto;
+}
+
+table {
+  width: 100%;
+  min-width: 720px;
+  border-spacing: 0;
+}
+
+th[mat-header-cell] {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+tr[mat-row] td[mat-cell] {
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+tr[mat-row]:hover {
+  background: rgba(0, 0, 0, 0.02);
+}
+
+mat-paginator {
+  margin-top: 8px;
+}
+
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 160px;
+}
+
+@media (max-width: 600px) {
+  .mobile-list {
+    [matListItemIcon] {
+      color: rgba(0,0,0,0.54);
+      margin-right: 8px;
+    }
+
+    [matListItemTitle] {
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 1.25rem;
+    }
+
+    [matListItemLine] {
+      font-size: 12px;
+      color: rgba(0,0,0,0.6);
+    }
+
+    .amount[matListItemMeta] {
+      color: #1976d2;
+      padding: 2px 10px;
+      font-weight: 600;
+      font-size: 12px;
+      margin-left: auto;
+    }
+
+    .chevron[matListItemMeta] {
+      color: rgba(0,0,0,0.38);
+    }
+  }
+}

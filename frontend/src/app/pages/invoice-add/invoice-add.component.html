@@ -1,0 +1,94 @@
+<mat-toolbar color="primary">
+  <button mat-icon-button routerLink="/invoices"><mat-icon>arrow_back</mat-icon></button>
+  <span>Create Invoice</span>
+</mat-toolbar>
+
+<div class="container">
+  <mat-card>
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      <div class="row">
+        <mat-form-field appearance="outline">
+          <mat-label>From Name</mat-label>
+          <input matInput formControlName="fromName" />
+          <mat-error *ngIf="form.get('fromName')?.hasError('required')">Sender name is required.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>From Address</mat-label>
+          <input matInput formControlName="fromAddress" />
+          <mat-error *ngIf="form.get('fromAddress')?.hasError('required')">Sender address is required.</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="row">
+        <mat-form-field appearance="outline">
+          <mat-label>To Name</mat-label>
+          <input matInput formControlName="toName" />
+          <mat-error *ngIf="form.get('toName')?.hasError('required')">Receiver name is required.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>To Address</mat-label>
+          <input matInput formControlName="toAddress" />
+          <mat-error *ngIf="form.get('toAddress')?.hasError('required')">Receiver address is required.</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="items-header-row">
+        <h5>Items</h5>
+        <button mat-flat-button color="primary" type="button" (click)="addItem()">
+          <mat-icon>add</mat-icon>
+          Add Item
+        </button>
+      </div>
+
+      <div class="items-table" formArrayName="invoiceDetails">
+        <div class="items-header desktop-only">
+          <div>Item</div>
+          <div>Quantity</div>
+          <div>Rate</div>
+          <div>Total</div>
+          <div>Actions</div>
+        </div>
+        <div class="item-row" *ngFor="let item of invoiceDetails.controls; let i = index" [formGroupName]="i">
+          <mat-form-field appearance="outline">
+            <mat-label>Item Name</mat-label>
+            <input matInput formControlName="itemName" />
+            <mat-error *ngIf="item.get('itemName')?.hasError('required')">Item name is required.</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Quantity</mat-label>
+            <input matInput type="number" formControlName="itemQuantity" min="1"/>
+            <mat-error *ngIf="item.get('itemQuantity')?.hasError('required')">Quantity is required.</mat-error>
+            <mat-error *ngIf="item.get('itemQuantity')?.hasError('min')">Quantity can't be zero.</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Rate</mat-label>
+            <input matInput type="number" formControlName="itemRate" min="0"/>
+            <mat-error *ngIf="item.get('itemRate')?.hasError('required')">Price is required.</mat-error>
+            <mat-error *ngIf="item.get('itemRate')?.hasError('min')">Price can't be less than zero.</mat-error>
+          </mat-form-field>
+
+          <div class="item-total">₹ {{ itemTotal(i) | number:'1.2-2' }}</div>
+
+          <div class="item-actions">
+            <button mat-icon-button color="warn" type="button" (click)="removeItem(i)" aria-label="Remove item">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="summary-row">
+        <div class="total">Grand Total: ₹ {{ invoiceTotal() | number:'1.2-2' }}</div>
+      </div>
+
+      <div class="actions-row">
+        <button mat-button color="warn" type="button" routerLink="/invoices">Cancel</button>
+        <button mat-flat-button color="primary" type="submit" [disabled]="saving">Save Invoice</button>
+      </div>
+    </form>
+  </mat-card>
+</div>
